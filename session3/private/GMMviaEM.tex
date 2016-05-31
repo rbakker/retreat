@@ -1,0 +1,38 @@
+\begin{frame}\frametitle{Clustering with Gaussian mixture models}
+\textbf{Gaussian Mixture model:} stochastic model $f(x)$ that is a mixture (=linear combination) of $K$ Gaussian random variables (components) $f_k$ with weights (priors) $\lambda_k$, such that all $\lambda_k >0$ and $\sum \lambda_k = 1$: 
+\begin{align*} f(x) = \sum_{k=1}^K \lambda_k f_k(x), &\text{ where } f_k \sim \mathcal{N}(\mu_k, \Sigma_k)
+\end{align*}
+Used for statistical inference, e.g. unsupervised learning, clustering. \\
+\vspace{1cm}
+TODO: nice picture here
+\end{frame}
+
+\begin{frame}\frametitle{Q: How to fit the Gaussians to the data?}
+{\Large A: \textbf{Expectation maximisation} (EM)}\\
+\begin{itemize}
+\item essentially: weighted maximum likelihood estimation
+\item running time, theoretical: $\mathcal{O}(N\cdot K\cdot i)$, $i=$ iterations
+\item running time, practical: $i < 10^2$
+\end{itemize}
+\begin{algorithmic}
+\STATE{calculate expected value of likelihood for the conditional distribution given the dataset with current parameter estimates}
+\STATE{find the parameters that maximise the likelihood}
+\end{algorithmic}
+There are improvements regarding thresholding, speed of convergence
+\end{frame}
+
+\begin{frame}\frametitle{GMM fitting with EM}
+\textbf{Advantages} of GMM over other clustering methods:
+\begin{itemize}
+\item EM gives assignment prob's that a point belongs to a cluster
+\item number of cluster detected automatically (if not forced)
+\item different clusterings easily comparable by information criteria (AIC, BIC)
+\item no ambiguity/subjective choice in metrics
+\end{itemize}
+\textbf{Disadvantages} of GMM:
+\begin{itemize}
+\item more time-intensive for iterations 
+\item may only find local maxima for few iterations
+\item prone to singularities in likelihoods
+\end{itemize}
+\end{frame}
